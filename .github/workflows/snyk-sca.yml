@@ -30,7 +30,9 @@ jobs:
           args: --severity-threshold=high
 
       - name: Snyk Monitor
-        run: npx snyk monitor
+        uses: snyk/actions/node@master
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        with:
+          command: monitor
